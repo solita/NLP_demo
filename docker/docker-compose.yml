@@ -1,0 +1,31 @@
+
+# docker-compose.yml
+version: '3'
+services:
+  NLP_python:
+    container_name: NLP_python
+    image: python:3.9.7-alpine3.14
+    volumes:
+      - ${TESTING_DATA_PATH}/GitHub/NLP_demo/python:/python # persist data even if container shuts down
+      - ${TESTING_DATA_PATH}/GitHub/NLP_demo/data:/data
+    ports:
+      - "9888:8888"
+  NLP_mongo:
+    container_name: NLP_mongo
+    image: mongo:3-xenial # use latest official MongoDB version
+    volumes:
+      - ${TESTING_DATA_PATH}/mongo/data/db:/data/mongo/db # persist data even if container shuts down
+    ports:
+      - "37017:27017"
+  # webserver:
+  #   container_name: airflow_testing_local
+  #   image: puckel/docker-airflow:1.10.9 # use an unofficial image when no official one exist
+  #   ports:
+  #     - "8085:8080"
+  #   volumes:
+  #     - ${TESTING_DATA_PATH}/share:/usr/local/airflow/share
+  #     # - ${TESTING_DATA_PATH}/airflow/airflow.db:/usr/local/airflow/airflow.db
+  #     - ${GIT_REPO_PATH}/airflow/plugins:/usr/local/airflow/plugins
+  #     - ${GIT_REPO_PATH}/testing/airflow-config/requirements.txt:/requirements.txt # Should decide whether to mount files from repository or copy.
+  #     - ${GIT_REPO_PATH}/testing/airflow-config/airflow.cfg:/usr/local/airflow/airflow.cfg # Should decide whether to mount files from repository or copy.
+  #     - ${GIT_REPO_PATH}/airflow/dags:/usr/local/airflow/dags # Should decide whether to mount files from repository or copy.
