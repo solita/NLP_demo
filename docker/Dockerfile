@@ -20,7 +20,6 @@ RUN apt-get clean && apt-get update --yes && apt install --yes --no-install-reco
     sudo \ 
     locales \
     less \
-    bash-completion \
     htop \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -41,8 +40,8 @@ ENV HOME="/home/${ML_USER}"
 ENV PATH="/home/${ML_USER}/.local/bin:${PATH}"
 
 # Copy a script that we will use to correct permissions after running certain commands
-COPY fix-permissions /usr/local/bin/fix-permissions
-RUN chmod a+rx /usr/local/bin/fix-permissions
+COPY fix-permissions.sh /usr/local/bin/fix-permissions.sh
+RUN chmod a+rx /usr/local/bin/fix-permissions.sh
 
 # Create NB_USER with name jovyan user with UID=1000 and in the 'users' group
 # and make sure these dirs are writable by the `users` group.
@@ -51,7 +50,7 @@ RUN echo "auth requisite pam_deny.so" >> /etc/pam.d/su && \
     sed -i.bak -e 's/^%sudo/#%sudo/' /etc/sudoers && \
     useradd -l -m -s /bin/bash -N -u "${ML_UID}" "${ML_USER}" && \
     chmod g+w /etc/passwd && \
-    fix-permissions "${HOME}"
+    fix-permissions.sh "${HOME}"
 
 USER $ML_UID
 
@@ -63,11 +62,9 @@ ENV SHELL=/bin/bash
 RUN mkdir "/home/${ML_USER}/notebooks" && \
     mkdir "/home/${ML_USER}/python" && \
     mkdir "/home/${ML_USER}/work" && \
-    fix-permissions "/home/${ML_USER}"
+    fix-permissions.sh "/home/${ML_USER}"
 
-RUN set -ex && fix-permissions "/home/${ML_USER}"
-
-RUN echo "source /etc/profile.d/bash_completion.sh" >> ~/.bashrc
+RUN set -ex && fix-permissions.sh "/home/${ML_USER}"
 
 COPY ./requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt

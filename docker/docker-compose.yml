@@ -6,20 +6,16 @@ services:
     container_name: NLP_python
     image: docker-nlp-python:latest
     volumes: # persist data even if container shuts down
-      - ${SHARE_DATA_PATH}/python:/home/ml_user/python
-      - ${SHARE_DATA_PATH}/notebooks:/home/ml_user/notebooks
+      - ${GIT_REPO_PATH}/notebooks:/home/ml_user/notebooks
       - ${SHARE_DATA_PATH}/work:/home/ml_user/work
       - ${SHARE_DATA_PATH}/data:/home/ml_user/data
     ports:
       - "8888:8888"
     restart: 'no'
     command: jupyter lab --notebook-dir=/home/ml_user/notebooks --ip=0.0.0.0 --port=8888 --no-browser
-    environment:
-      NB_UID: ${UID}
-      NB_GID: ${GID}
   NLP_mongo:
     container_name: NLP_mongo
-    image: mongo:4.4.9-focal # use latest official MongoDB version
+    image: mongo:4.4.9-focal # Use the official MongoDB image
     volumes: # persist data even if container shuts down
       - ${SHARE_DATA_PATH}/mongo/data/db:/data/mongo/db
     ports:
