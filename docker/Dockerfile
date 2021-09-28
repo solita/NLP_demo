@@ -75,4 +75,5 @@ EXPOSE 8888
 # Expose the port for remote debugging
 EXPOSE 3000
 
+
 WORKDIR "${HOME}"
