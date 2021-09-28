@@ -72,4 +72,7 @@ RUN pip install -r /requirements.txt
 # Expose the port for the Jupyter notebook web interface
 EXPOSE 8888
 
+# Expose the port for remote debugging
+EXPOSE 3000
+
 WORKDIR "${HOME}"
