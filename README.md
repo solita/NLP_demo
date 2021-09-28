@@ -4,7 +4,7 @@ Demotaan NLP-menetelmien käyttöä tekstin luokittelussa
 Käynnistä komennolla:
 
 ```bash
-sh run_demo.sh &
+sh run-demo.sh &
 ```
 
 Demo toimii Pythonin Jupyter lab -moduulilla. Käynnistääksesi Jupyter notebookin, etsi konsolista alla olevan kaltainen rivi
