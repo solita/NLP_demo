@@ -17,6 +17,7 @@ NLP_python  |      or http://127.0.0.1:8888/lab?token=<tunniste>
 ```
 ja kopio se selaimeesi.
 
+Katso myös ohjeet notebookin *demo.ipynb* alusta datan hakua, lähteitä jne varten.
 
 Pysäytä komennolla:
 
