@@ -7,7 +7,7 @@ Käynnistä komennolla:
 bash docker/run-demo.sh &
 ```
 
-Demo toimii Pythonin Jupyter lab -moduulilla. Käynnistääksesi Jupyter notebookin, etsi konsolista alla olevan kaltainen rivi
+Demo toimii Pythonin Jupyter lab -moduulilla. Käynnistääksesi Jupyter labin, etsi konsolista alla olevan kaltainen rivi
 ```bash
 NLP_python  |     To access the server, open this file in a browser:
 NLP_python  |         file:///home/ml_user/.local/share/jupyter/runtime/jpserver-1-open.html
