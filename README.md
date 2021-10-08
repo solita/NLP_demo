@@ -1,10 +1,10 @@
-# NLP_demo
-Demotaan NLP-menetelmien käyttöä tekstin luokittelussa
+# NLP demo
+Demotaan NLP-menetelmien käyttöä tekstin luokittelussa.
 
 Käynnistä komennolla:
 
 ```bash
-sh run-demo.sh &
+bash docker/run-demo.sh &
 ```
 
 Demo toimii Pythonin Jupyter lab -moduulilla. Käynnistääksesi Jupyter notebookin, etsi konsolista alla olevan kaltainen rivi
