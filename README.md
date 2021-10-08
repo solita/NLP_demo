@@ -17,7 +17,7 @@ NLP_python  |      or http://127.0.0.1:8888/lab?token=<tunniste>
 ```
 ja kopio se selaimeesi.
 
-Katso myös ohjeet notebookin *demo.ipynb* alusta datan hakua, lähteitä jne varten.
+Katso myös ohjeet notebookin *demo.ipynb* alusta datan hakua, lähteitä jne varten. */notebooks* -kansiossa on myös tiedosto *browse_imdb_data.py* imdb-datan selailua varten.
 
 Pysäytä komennolla:
 
