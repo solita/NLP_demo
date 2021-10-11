@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import numpy as np
 
 data_dir = '/home/ml_user/data/IMDb_raw'
 
@@ -9,6 +10,38 @@ df_titles = pd.read_csv(file_name, sep='\t')
 
 # Read references to negative reviews for training data:
 file_name = os.path.join(data_dir, 'aclImdb/train/urls_neg.txt')
+
+myclient = pymongo.MongoClient("mongodb://NLP_mongo:27017/")
+mydb = myclient["movies"]
+mycol = mydb["titles"]
+
+df_uniq_titles = df_titles.titleId.drop_duplicates()
+
+for ind in range(0,10):
+    print(df_uniq_titles.iloc[ind])
+
+    df_title = df_titles.loc[df_titles.titleId == df_uniq_titles.iloc[ind]].copy()
+
+    df_title = df_title.replace('\\N', '')
+
+    orig_title_list = df_title.loc[df_title.isOriginalTitle == 1, 'title'].to_list()
+    orig_title_lang_list = df_title.loc[df_title.isOriginalTitle == 1, 'language'].to_list()
+
+    if len(orig_title_list) > 0:
+        orig_title = orig_title_list[0]
+        orig_title_lang = orig_title_lang_list[0]
+
+    alt_title_list = df_title.loc[df_title.isOriginalTitle == 0, 'title'].to_list()
+    alt_title_lang_list = df_title.loc[df_title.isOriginalTitle == 0, 'language'].to_list()
+
+    imdb_id = df_title.titleId[0]
+
+    insert_dict = {'imdb_id': imdb_id, 'orig_title': orig_title, 'orig_title_lang': orig_title_lang, 'alternate_titles': alt_title_list, 'alternate_title_lang': alt_title_lang_list}
+
+    print(insert_dict)
+
+    mycol.insert_one(insert_dict)
+
 
 df_train_neg_urls = pd.read_csv(file_name, sep='\s+', header=None)
 
@@ -47,3 +80,4 @@ df_train_ind_refs.sort_values(by=['ind'], inplace=True, ignore_index=True)
 print(df_train_ind_refs.head())
 
 print(df_train_ind_refs.iloc[0,2])
+
