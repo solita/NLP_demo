@@ -1,5 +1,5 @@
-# NLP demo
-Demotaan NLP-menetelmien käyttöä tekstin luokittelussa.
+# NLP-demo
+Demotaan NLP-menetelmien käyttöä tekstin sentimenttianalyysissä.
 
 Käynnistä komennolla:
 
